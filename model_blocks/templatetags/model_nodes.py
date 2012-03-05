@@ -135,6 +135,9 @@ class ModelDetailNode (BaseModelBlockNode):
             
             label = field.verbose_name
             value = getattr(instance, field.name)
+            if field.choices:
+                method_name = "get_%s_display" % field.name
+                value = getattr(instance, method_name)()
             is_list = False
             is_link = (type(field).__name__ in ('URLField', 'FileField'))
             model = instance._meta.module_name
