@@ -140,7 +140,6 @@ class ModelDetailNode (BaseModelBlockNode):
                 method_name = "get_%s_display" % field.name
                 value = getattr(instance, method_name)()
             is_list = False
-            # is_link = (type(field).__name__ in ('URLField', 'FileField'))
             is_link = any(isinstance(field, field_class)
                     for field_class in [URLField, FileField])
             model = instance._meta.module_name
